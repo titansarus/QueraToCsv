@@ -1,0 +1,87 @@
+------------- user information -------------
+identity: 90101235
+username: username
+full name: name
+email address: test@example.com
+------------- result -------------
+problem name: problem
+state: داوری شد
+short judge result: نمره داده شد
+penalty: 100%
+judge score: 22
+judge score with delay: 22
+instructor score: not set yet.
+------------- judge log -------------
+
+Starting tester...
+type = judge
+Tue Mar 23 02:00:49 +0430 2021
+Language: py3
+Time Limit: 0.6 s
+Memory Limit: 102400 kB
+Output size limit: 1048576 bytes
+Checking Python Syntax
+Syntax checked. Exit Code=0  Execution Time: 68 ms
+
+Testing...
+11 tests found
+
+=== TEST 1 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 2 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 3 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 4 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 5 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 6 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 7 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 8 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 9 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+=== TEST 10 ===
+Exit Code = 1
+Time: 0.00 s
+Runtime Error
+
+=== TEST 11 ===
+Exit Code = 0
+Time: 0.00 s
+ACCEPTED
+
+Score from 100000: 90909
+
+Total Execution Time: 2552 ms
+
