@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import os
+import argparse
 
 df: pd.DataFrame = pd.read_csv("1.csv")
 
@@ -97,5 +98,11 @@ def put_scores_in_dataframe(src_csv: str, student_id_heading="Students", score_h
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('-s', '--src', help='source csv filename', nargs=1)
+    parser.add_argument('-d', '--dest', help='destination csv filename', nargs=1)
+    parser.add_argument('-r', '--result', help='result file name', default="result.txt", nargs=1)
+    args = parser.parse_args()
+    print(args.result)
     score_df = put_scores_in_dataframe("1.csv")
     score_df.to_csv("result.csv")
