@@ -8,11 +8,21 @@ ERROR_CODE_MAGIC_NUMBER = -113543635432
 
 
 def english_to_persian_number(number):
+    """
+    converts a number from English alphabet to Persian alphabet. It is used because some students use Persian alphabet
+    in their student number and for each student number, we must check both English and Persian alphabet.
+
+    :param number: int or str
+     Number in English alphabet
+    :return: str
+     Number in Persian alphabet
+    """
     number = str(number)
     input_chars = '1234567890'
     output_chars = '۱۲۳۴۵۶۷۸۹۰'
     translation_table = str.maketrans(input_chars, output_chars)
     return number.translate(translation_table)
+
 
 def find_score_in_quera(student_number, judge_score_string="judge score:", folder_structure_path="scores",
                         file_name="result.txt"):
@@ -45,6 +55,7 @@ def find_score_in_quera(student_number, judge_score_string="judge score:", folde
     file.close()
     return retval
 
+
 def put_scores_in_dataframe(src_csv: str, std_id_header="Students", score_heading="Score", not_found_score="0",
                             judge_score_string="judge score: ", folder_structure="scores",
                             quera_file_name="result.txt"):
@@ -52,7 +63,7 @@ def put_scores_in_dataframe(src_csv: str, std_id_header="Students", score_headin
     for std in score_df[std_id_header]:
         score = find_score_in_quera(std, judge_score_string=judge_score_string, folder_structure_path=folder_structure,
                                     file_name=quera_file_name)
-        if score==ERROR_CODE_MAGIC_NUMBER:
+        if score == ERROR_CODE_MAGIC_NUMBER:
             score_df.loc[score_df[std_id_header] == std, score_heading] = not_found_score
         else:
             score_df.loc[score_df[std_id_header] == std, score_heading] = score
