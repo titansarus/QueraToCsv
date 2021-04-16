@@ -1,10 +1,18 @@
 import pandas as pd
 import re
+import os
 
 df: pd.DataFrame = pd.read_csv("1.csv")
 
 ERROR_CODE_MAGIC_NUMBER = -113543635432
 
+
+def english_to_persian_number(number):
+    number = str(number)
+    input_chars = '1234567890'
+    output_chars = '۱۲۳۴۵۶۷۸۹۰'
+    translation_table = str.maketrans(input_chars, output_chars)
+    return number.translate(translation_table)
 
 def find_score_in_quera(student_number, judge_score_string="judge score:", folder_structure_path="scores",
                         file_name="result.txt"):
@@ -24,15 +32,18 @@ def find_score_in_quera(student_number, judge_score_string="judge score:", folde
     :return: int or str
         Score of specified student or ERROR_CODE_MAGIC_NUMBER if it cannot find the file.
     """
-    try:
-        file = open(f"{folder_structure_path}/{student_number}/{file_name}", mode='r', encoding="utf8")
-        result = file.read()
-        retval = re.search(f"{judge_score_string} (\\d+)", result).group(1)
-        file.close()
-        return retval
-    except FileNotFoundError:
+    english_path = f"{folder_structure_path}/{student_number}/{file_name}"
+    persian_path = f"{folder_structure_path}/{english_to_persian_number(student_number)}/{file_name}"
+    if os.path.exists(english_path):
+        file = open(english_path, encoding='utf8')
+    elif os.path.exists(persian_path):
+        file = open(persian_path, encoding='utf8')
+    else:
         return ERROR_CODE_MAGIC_NUMBER
-
+    result = file.read()
+    retval = re.search(f"{judge_score_string}(\\d+)", result).group(1)
+    file.close()
+    return retval
 
 def put_scores_in_dataframe(src_csv: str, std_id_header="Students", score_heading="Score", not_found_score="0",
                             judge_score_string="judge score: ", folder_structure="scores",
