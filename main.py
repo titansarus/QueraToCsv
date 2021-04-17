@@ -117,11 +117,11 @@ def parser_factory():
     return _parser
 
 
-def handle_parse_errors(args: argparse.Namespace, parser: argparse.ArgumentParser):
-    if not args.src:
-        parser.error("Missing --src. Source CSV filename is required.")
-    if not args.dest:
-        parser.error("Missing --dest. Destination CSV filename is required.")
+def handle_parse_errors(_args: argparse.Namespace, _parser: argparse.ArgumentParser):
+    if not _args.src:
+        _parser.error("Missing --src. Source CSV filename is required.")
+    if not _args.dest:
+        _parser.error("Missing --dest. Destination CSV filename is required.")
 
 
 if __name__ == '__main__':
