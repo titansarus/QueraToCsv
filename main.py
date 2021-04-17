@@ -25,7 +25,7 @@ def english_to_persian_number(number):
     return number.translate(translation_table)
 
 
-def find_score_in_quera(student_id, judge_score_string="judge score:", folder_structure_path="scores",
+def find_score_in_quera(student_id, folder_structure_path, judge_score_string="judge score:",
                         result_filename="result.txt"):
     """
     This function tries to open file in the address "./folder_structure_path/student_id/file_name"
@@ -57,8 +57,9 @@ def find_score_in_quera(student_id, judge_score_string="judge score:", folder_st
     return retval
 
 
-def put_scores_in_dataframe(src_csv: str, student_id_heading="Students", score_heading="Score", not_found_score="0",
-                            judge_score_string="judge score: ", folder_structure_path="scores",
+def put_scores_in_dataframe(src_csv: str, folder_structure_path, student_id_heading="Students", score_heading="Score",
+                            not_found_score="0",
+                            judge_score_string="judge score: ",
                             result_filename="result.txt"):
     """
     Put scores that are in Quera results files into a Pandas DataFrame.
@@ -84,17 +85,17 @@ def put_scores_in_dataframe(src_csv: str, student_id_heading="Students", score_h
     :return: Pandas.DataFrame
         A Pandas DataFrame that contains student IDs and scores.
     """
-    score_df: pd.DataFrame = pd.read_csv(src_csv)
-    for std in score_df[student_id_heading]:
+    _score_df: pd.DataFrame = pd.read_csv(src_csv)
+    for std in _score_df[student_id_heading]:
         score = find_score_in_quera(std, judge_score_string=judge_score_string,
                                     folder_structure_path=folder_structure_path,
                                     result_filename=result_filename)
         if score == ERROR_CODE_MAGIC_NUMBER:
-            score_df.loc[score_df[student_id_heading] == std, score_heading] = not_found_score
+            _score_df.loc[_score_df[student_id_heading] == std, score_heading] = not_found_score
         else:
-            score_df.loc[score_df[student_id_heading] == std, score_heading] = score
+            _score_df.loc[_score_df[student_id_heading] == std, score_heading] = score
 
-    return score_df
+    return _score_df
 
 
 def parser_factory():
@@ -103,16 +104,17 @@ def parser_factory():
 
     :return: argparse.ArgumentParser
     """
-    parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('-s', '--src', help='Source csv filename', nargs=1)
-    parser.add_argument('-d', '--dest', help='Destination csv filename', nargs=1)
-    parser.add_argument('-r', '--result', help='Result file name', default="result.txt", nargs="?")
-    parser.add_argument('-f', '--folder', help='Folder structure ath', default="scores", nargs="?")
-    parser.add_argument('-j', '--judge', help='Judge Score string in result file', default="judge score: ", nargs="?")
-    parser.add_argument('-n', '--not-found', help='Score to replace when student id is not found', default=0 , nargs = "?")
-    parser.add_argument('--id', help='Student ID heading in CSV', default="Students", nargs="?")
-    parser.add_argument('--score', help='Score heading in CSV', default="Score", nargs="?")
-    return parser
+    _parser = argparse.ArgumentParser(description='Process some integers.')
+    _parser.add_argument('-s', '--src', help='Source csv filename', nargs=1, required=True)
+    _parser.add_argument('-d', '--dest', help='Destination csv filename', nargs=1, required=True)
+    _parser.add_argument('-f', '--folder', help='Folder structure ath', default="scores", nargs="?")
+    _parser.add_argument('-r', '--result', help='Result file name', default="result.txt", nargs="?")
+    _parser.add_argument('-j', '--judge', help='Judge Score string in result file', default="judge score: ", nargs="?")
+    _parser.add_argument('-n', '--not-found', help='Score to replace when student id is not found', default=0,
+                         nargs="?")
+    _parser.add_argument('--id', help='Student ID heading in CSV', default="Students", nargs="?")
+    _parser.add_argument('--score', help='Score heading in CSV', default="Score", nargs="?")
+    return _parser
 
 
 def handle_parse_errors(args: argparse.Namespace, parser: argparse.ArgumentParser):
@@ -122,9 +124,6 @@ def handle_parse_errors(args: argparse.Namespace, parser: argparse.ArgumentParse
         parser.error("Missing --dest. Destination CSV filename is required.")
 
 
-# src_csv: str, student_id_heading="Students", score_heading="Score", not_found_score="0",
-#                             judge_score_string="judge score: ", folder_structure_path="scores",
-#                             result_filename="result.txt"
 if __name__ == '__main__':
     parser = parser_factory()
     args = parser.parse_args()
