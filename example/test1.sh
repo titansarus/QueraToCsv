@@ -1,0 +1,1 @@
+python3 ../src/main.py -s ./students.csv -d ./1.csv -f ./scores/1
