@@ -106,26 +106,31 @@ def parser_factory():
     parser = argparse.ArgumentParser(description='Process some integers.')
     parser.add_argument('-s', '--src', help='Source csv filename', nargs=1)
     parser.add_argument('-d', '--dest', help='Destination csv filename', nargs=1)
-    parser.add_argument('-r', '--result', help='Result file name', default="result.txt", nargs=1)
-    parser.add_argument('-f', '--folder', help='Folder structure ath', default="scores", nargs=1)
-    parser.add_argument('-j', '--judge', help='Judge Score string in result file', default="judge score: ", nargs=1)
-    parser.add_argument('-n', '--not-found', help='Score to replace when student id is not found', default=0, nargs=1)
-    parser.add_argument('--id', help='Student ID heading in CSV', default="Students", nargs=1)
-    parser.add_argument('--score', help='Score heading in CSV', default="Score", nargs=1)
+    parser.add_argument('-r', '--result', help='Result file name', default="result.txt", nargs="?")
+    parser.add_argument('-f', '--folder', help='Folder structure ath', default="scores", nargs="?")
+    parser.add_argument('-j', '--judge', help='Judge Score string in result file', default="judge score: ", nargs="?")
+    parser.add_argument('-n', '--not-found', help='Score to replace when student id is not found', default=0 , nargs = "?")
+    parser.add_argument('--id', help='Student ID heading in CSV', default="Students", nargs="?")
+    parser.add_argument('--score', help='Score heading in CSV', default="Score", nargs="?")
     return parser
 
 
-def handle_parse_errors(args : argparse.Namespace, parser: argparse.ArgumentParser):
+def handle_parse_errors(args: argparse.Namespace, parser: argparse.ArgumentParser):
     if not args.src:
         parser.error("Missing --src. Source CSV filename is required.")
     if not args.dest:
         parser.error("Missing --dest. Destination CSV filename is required.")
 
 
+# src_csv: str, student_id_heading="Students", score_heading="Score", not_found_score="0",
+#                             judge_score_string="judge score: ", folder_structure_path="scores",
+#                             result_filename="result.txt"
 if __name__ == '__main__':
     parser = parser_factory()
     args = parser.parse_args()
     handle_parse_errors(args, parser)
-    print(args.result)
-    score_df = put_scores_in_dataframe("1.csv")
-    score_df.to_csv("result.csv")
+    score_df = put_scores_in_dataframe(src_csv=args.src[0], student_id_heading=args.id,
+                                       score_heading=args.score, not_found_score=args.not_found,
+                                       judge_score_string=args.judge,
+                                       folder_structure_path=args.folder, result_filename=args.result)
+    score_df.to_csv(args.dest[0])
