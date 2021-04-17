@@ -3,7 +3,6 @@ import re
 import os
 import argparse
 
-df: pd.DataFrame = pd.read_csv("1.csv")
 
 ERROR_CODE_MAGIC_NUMBER = -113543635432
 
