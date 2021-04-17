@@ -13,6 +13,7 @@
 
     - [نمونه استفاده](#نمونه-استفاده)
 
+- [Maintainer](#Maintainer)
 ---
 
 # English
@@ -272,3 +273,9 @@ python main.py -s students.csv -d 2.csv -f scores/2
 این برنامه، اعداد فارسی که بعضا دانشجویان به عنوان شماره دانشجویی وارد می‌کنند را هم به خوبی هندل می‌کند.
 
 </div>
+
+----
+
+# Maintainer
+
+- [Amirmahdi Namjoo](https://github.com/titansarus)
