@@ -105,9 +105,9 @@ def parser_factory():
     :return: argparse.ArgumentParser
     """
     _parser = argparse.ArgumentParser(description='Process some integers.')
-    _parser.add_argument('-s', '--src', help='Source csv filename', nargs=1, required=True)
-    _parser.add_argument('-d', '--dest', help='Destination csv filename', nargs=1, required=True)
-    _parser.add_argument('-f', '--folder', help='Folder structure ath', default="scores", nargs="?")
+    _parser.add_argument('-s', '--src', help='Source csv filename', nargs="?", required=True)
+    _parser.add_argument('-d', '--dest', help='Destination csv filename', nargs="?", required=True)
+    _parser.add_argument('-f', '--folder', help='Folder structure ath', nargs="?", required=True)
     _parser.add_argument('-r', '--result', help='Result file name', default="result.txt", nargs="?")
     _parser.add_argument('-j', '--judge', help='Judge Score string in result file', default="judge score: ", nargs="?")
     _parser.add_argument('-n', '--not-found', help='Score to replace when student id is not found', default=0,
@@ -128,8 +128,8 @@ if __name__ == '__main__':
     parser = parser_factory()
     args = parser.parse_args()
     handle_parse_errors(args, parser)
-    score_df = put_scores_in_dataframe(src_csv=args.src[0], student_id_heading=args.id,
+    score_df = put_scores_in_dataframe(src_csv=args.src, student_id_heading=args.id,
                                        score_heading=args.score, not_found_score=args.not_found,
                                        judge_score_string=args.judge,
                                        folder_structure_path=args.folder, result_filename=args.result)
-    score_df.to_csv(args.dest[0])
+    score_df.to_csv(args.dest)
