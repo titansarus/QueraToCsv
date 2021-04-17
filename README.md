@@ -1,6 +1,19 @@
 # QueraToCsv
 
----------
+---
+
+
+- [English](#english)
+    - [What is this project?](#what-is-this-project)
+    - [Example Usage](#example-usage)
+
+- [فارسی](#فارسی)
+
+    - [این پروژه چیست؟](#این-پروژه-چیست؟)
+
+    - [نمونه استفاده](#نمونه-استفاده)
+
+---
 
 # English
 
@@ -32,13 +45,13 @@ then finds each student's score in those log files and puts them in another CSV 
 For simple usage, you can use this command on the source of this repository:
 
 ```shell
-python ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1 
+python ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1
 ```
 
 or
 
 ```shell
-python3 ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1 
+python3 ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1
 ```
 
 `-s` indicates source CSV file that includes student-IDs.
@@ -57,12 +70,12 @@ Students,Score
 90101237,   0
 ```
 
-| Students | Score |
-|----------|-------|
-| 90101234 |   0 (or blank)   |
-| 90101235 |   0 (or blank)    |
-| 90101236 |   0 (or blank)    |
-| 90101237 |   0 (or blank)    |
+| Students | Score        |
+| -------- | ------------ |
+| 90101234 | 0 (or blank) |
+| 90101235 | 0 (or blank) |
+| 90101236 | 0 (or blank) |
+| 90101237 | 0 (or blank) |
 
 By default, it expects `Students` as the name of the Student-ID column and `Score` for the scores column, but you can
 override it by `--id` and `--score` parameter.
@@ -110,8 +123,7 @@ python main.py -s students.csv -d 2.csv -f scores/2
 Also, the scores for other_student which was not in our class will be ignored, and we need not worry about cleaning the
 CSV file.
 
-Our program also handles persian alphabets for numbers.
-
+Our program also handles persian alphabets for student-IDs.
 
 <div dir="rtl">
 
@@ -119,7 +131,7 @@ Our program also handles persian alphabets for numbers.
 
 QueraToCSV یک پروژه ساده پایتون برای تبدیل فایل‌نتایج کوئرا به CSV است .
 
-[کوئرا](https://quera.ir/)  یک سیستم مدیریت آموزش (LMS) به همراه سیستم داوری آنلاین برای زبان‌های برنامه‌نویسی است.
+[کوئرا](https://quera.ir/) یک سیستم مدیریت آموزش (LMS) به همراه سیستم داوری آنلاین برای زبان‌های برنامه‌نویسی است.
 تعدادی از دانشگاه‌های ایران از کوئرا برای اتوماسیون و خودکارسازی فرآیند تصحیح تمرین‌های برنامه نویسی استفاده‌ می‌کنند.
 
 البته کوئرا در حال حاضر فراتر از یک سیستم مدیریت آموزش است و سرویس‌های ممختلفی نظیر مسابقات و آگهی‌های جذب استعداد و
@@ -151,7 +163,7 @@ result.txt هستند که نمره نهایی دانشجو در آن نوشته
 <div dir="ltr">
 
 ```shell
-python ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1 
+python ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1
 ```
 
 </div>
@@ -161,7 +173,7 @@ python ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/s
 <div dir="ltr">
 
 ```shell
-python3 ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1 
+python3 ./src/main.py -s ./example/students.csv -d ./example/1.csv -f ./example/scores/1
 ```
 
 </div>
@@ -190,12 +202,12 @@ Students,Score
 
 <div dir="ltr">
 
-| Students | Score |
-|----------|-------|
-| 90101234 |   0 (or blank)   |
-| 90101235 |   0 (or blank)    |
-| 90101236 |   0 (or blank)    |
-| 90101237 |   0 (or blank)    |
+| Students | Score        |
+| -------- | ------------ |
+| 90101234 | 0 (or blank) |
+| 90101235 | 0 (or blank) |
+| 90101236 | 0 (or blank) |
+| 90101237 | 0 (or blank) |
 
 </div>
 
@@ -244,7 +256,6 @@ Students,Score
 ```
 
 </div>
-
 
 حال به راحتی با اجرای دو دستور زیر می‌توانیم نمرات را برای دانشجویان کلاس در یک فایل csv بدست بیاوریم. نمره دانشجویان
 متفرقه هم در نظر گرفته نمی‌شود و نیازی به نگرانی برای پاکسازی فایل csv نخواهیم داشت.
